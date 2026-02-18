@@ -23,10 +23,7 @@ export function loadLoginPage() {
     if (submitBtn) submitBtn.disabled = true;
 
     try {
-      const data = await apiPost("/api/login_check", {
-        username: email,
-        password,
-      });
+      const data = await apiPost("/api/login_check", { email, password });
 
       if (!data?.token || !String(data.token).includes(".")) {
         throw new Error("Token JWT invalide reçu du serveur.");
@@ -34,7 +31,6 @@ export function loadLoginPage() {
 
       localStorage.setItem("vg_token", data.token);
 
-      // Récupère l'utilisateur connecté
       const me = await apiGet("/api/auth/me");
       localStorage.setItem("vg_user", JSON.stringify(me));
 
