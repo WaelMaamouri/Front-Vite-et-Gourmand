@@ -31,7 +31,7 @@ export function loadLoginPage() {
 
       localStorage.setItem("vg_token", data.token);
 
-      const me = await apiGet("/api/auth/me");
+      const me = await apiGet("/api/me");
       localStorage.setItem("vg_user", JSON.stringify(me));
 
       refreshAuthUi();
