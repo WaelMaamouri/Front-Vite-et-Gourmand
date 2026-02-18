@@ -1,4 +1,4 @@
-import { apiGet } from "./api.js";
+import { apiGet, API_BASE } from "./api.js";
 
 function assetUrl(path) {
   if (!path) return "";
@@ -43,7 +43,7 @@ function renderMenus(grid, menus) {
   grid.innerHTML = menus
     .map((m) => {
       const img = m.image
-        ? `<img class="menu-img" src="${assetUrl(m.image)}" alt="${m.titre}">`
+        ? `<img class="menu-img" src="${API_BASE}${m.image}" alt="${m.titre}">`
         : `<div class="menu-img menu-img--placeholder">Image indisponible</div>`;
 
       return `
