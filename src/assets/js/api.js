@@ -1,157 +1,95 @@
-import { apiGet, API_BASE } from "./api.js";
+export const API_BASE = import.meta.env.VITE_API_URL || "";
 
-/**
- * Normalise l'URL d'image pour éviter localhost en prod
- */
-function resolveImageUrl(image) {
-  if (!image) return "";
+function getToken() {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem("vg_token");
+}
 
-  if (/^https?:\/\//i.test(image)) {
-    if (image.includes("127.0.0.1") || image.includes("localhost")) {
-      try {
-        const u = new URL(image);
-        return `${API_BASE}${u.pathname}`;
-      } catch {
-        return image;
-      }
+function getHeaders(extra = {}) {
+  const token = getToken();
+  return {
+    Accept: "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...extra,
+  };
+}
+
+async function parseJsonOrThrow(res, method) {
+  const ct = res.headers.get("content-type") || "";
+
+  let data = null;
+
+  if (ct.includes("application/json")) {
+    data = await res.json().catch(() => ({}));
+  } else {
+    const text = await res.text().catch(() => "");
+    if (!res.ok) {
+      throw new Error(
+        `Erreur API (${method}) ${res.status}: ${text.slice(0, 160)}`,
+      );
     }
-    return image;
+    return text;
   }
 
-  if (image.startsWith("/")) {
-    return `${API_BASE}${image}`;
+  if (!res.ok) {
+    if (res.status === 401) {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("vg_token");
+        localStorage.removeItem("vg_user");
+      }
+      throw new Error("Non autorisé (401). Merci de vous reconnecter.");
+    }
+    throw new Error(data?.message || `Erreur API (${method}) ${res.status}`);
   }
 
-  return `${API_BASE}/${image}`;
+  return data;
 }
 
-/**
- * Récupère la valeur sélectionnée d’un groupe.
- */
-function getSelectedValue(selector) {
-  const checked = document.querySelector(`${selector}:checked`);
-  return checked ? checked.value : "";
+export async function apiGet(path) {
+  const res = await fetch(API_BASE + path, {
+    method: "GET",
+    headers: getHeaders(),
+    credentials: "omit",
+  });
+  return parseJsonOrThrow(res, "GET");
 }
 
-/*
- * Construit la query string à partir des filtres.
- */
-function buildQueryFromFilters() {
-  const minPrix = document.getElementById("filter-minPrix")?.value.trim() || "";
-  const maxPrix = document.getElementById("filter-maxPrix")?.value.trim() || "";
-  const minPersonnes =
-    document.getElementById("filter-minPersonnes")?.value.trim() || "";
-
-  const theme = getSelectedValue(".filter-theme");
-  const regime = getSelectedValue(".filter-regime");
-
-  const params = new URLSearchParams();
-  if (theme) params.set("theme", theme);
-  if (regime) params.set("regime", regime);
-  if (minPersonnes) params.set("minPersonnes", minPersonnes);
-  if (minPrix) params.set("minPrix", minPrix);
-  if (maxPrix) params.set("maxPrix", maxPrix);
-
-  const qs = params.toString();
-  return qs ? `?${qs}` : "";
+export async function apiPost(path, body) {
+  const res = await fetch(API_BASE + path, {
+    method: "POST",
+    headers: getHeaders({ "Content-Type": "application/json" }),
+    credentials: "omit",
+    body: JSON.stringify(body ?? {}),
+  });
+  return parseJsonOrThrow(res, "POST");
 }
 
-/**
- * Affiche les menus dans la grille HTML.
- */
-function renderMenus(grid, menus) {
-  grid.innerHTML = menus
-    .map((m) => {
-      const imgUrl = resolveImageUrl(m.image);
-
-      const img = imgUrl
-        ? `<img class="menu-img" src="${imgUrl}" alt="${m.titre}">`
-        : `<div class="menu-img menu-img--placeholder">Image indisponible</div>`;
-
-      return `
-        <article class="menu-card">
-          ${img}
-          <div class="menu-body">
-            <div class="menu-tags">
-              <span class="tag tag-primary">${m.theme ?? ""}</span>
-              <span class="tag">${m.regime ?? ""}</span>
-            </div>
-
-            <h3 class="menu-name">${m.titre}</h3>
-            <p class="menu-desc">${m.description ?? ""}</p>
-
-            <p class="menu-from">A partir de:</p>
-            <div class="menu-bottom">
-              <p class="menu-price">${m.prixMin}€<span>/ pers</span></p>
-              <p class="menu-min">👥 ${m.nbPersonnesMin} pers. min</p>
-            </div>
-
-            <a class="menu-btn" href="/menu?id=${m.id}" data-link>
-              Voir les détails
-            </a>
-          </div>
-        </article>
-      `;
-    })
-    .join("");
+export async function apiPatch(path, body) {
+  const res = await fetch(API_BASE + path, {
+    method: "PATCH",
+    headers: getHeaders({ "Content-Type": "application/json" }),
+    credentials: "omit",
+    body: JSON.stringify(body ?? {}),
+  });
+  return parseJsonOrThrow(res, "PATCH");
 }
 
-/**
- * Récupère les menus depuis l’API puis met à jour l’affichage.
- */
-async function fetchAndRender() {
-  const grid = document.querySelector(".cards-grid");
-  if (!grid) return;
-
-  grid.innerHTML = "<p>Chargement...</p>";
-
-  try {
-    const query = buildQueryFromFilters();
-    const menus = await apiGet("/api/menus" + query);
-    renderMenus(grid, menus);
-  } catch (e) {
-    console.error(e);
-    grid.innerHTML = "<p>Erreur lors du chargement des menus.</p>";
-  }
+export async function apiPut(path, body) {
+  const res = await fetch(API_BASE + path, {
+    method: "PUT",
+    headers: getHeaders({ "Content-Type": "application/json" }),
+    credentials: "omit",
+    body: JSON.stringify(body ?? {}),
+  });
+  return parseJsonOrThrow(res, "PUT");
 }
 
-/**
- * Branche les événements sur les filtres.
- */
-function bindFilters() {
-  const resetBtn = document.querySelector(".filters-reset");
-
-  if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
-      const minPrix = document.getElementById("filter-minPrix");
-      const maxPrix = document.getElementById("filter-maxPrix");
-      const minPersonnes = document.getElementById("filter-minPersonnes");
-
-      if (minPrix) minPrix.value = "";
-      if (maxPrix) maxPrix.value = "";
-      if (minPersonnes) minPersonnes.value = "";
-
-      document
-        .querySelectorAll(".filter-theme, .filter-regime")
-        .forEach((cb) => (cb.checked = false));
-
-      fetchAndRender();
-    });
-  }
-
-  document
-    .querySelectorAll("#filter-minPrix, #filter-maxPrix, #filter-minPersonnes")
-    .forEach((el) => el.addEventListener("input", fetchAndRender));
-
-  document
-    .querySelectorAll(".filter-theme, .filter-regime")
-    .forEach((cb) => cb.addEventListener("change", fetchAndRender));
-}
-
-/**
- * Point d’entrée de la page menus.
- */
-export async function loadMenusPage() {
-  bindFilters();
-  fetchAndRender();
+export async function apiDelete(path, body = null) {
+  const res = await fetch(API_BASE + path, {
+    method: "DELETE",
+    headers: getHeaders({ "Content-Type": "application/json" }),
+    credentials: "omit",
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  return parseJsonOrThrow(res, "DELETE");
 }

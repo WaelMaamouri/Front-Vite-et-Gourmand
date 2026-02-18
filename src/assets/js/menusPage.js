@@ -1,5 +1,10 @@
 import { apiGet } from "./api.js";
 
+function assetUrl(path) {
+  if (!path) return "";
+  if (path.startsWith("http")) return path;
+  return `${API_BASE}${path}`;
+}
 /**
  * Récupère la valeur sélectionnée d’un groupe.
  */
@@ -38,7 +43,7 @@ function renderMenus(grid, menus) {
   grid.innerHTML = menus
     .map((m) => {
       const img = m.image
-        ? `<img class="menu-img" src="${m.image}" alt="${m.titre}">`
+        ? `<img class="menu-img" src="${assetUrl(m.image)}" alt="${m.titre}">`
         : `<div class="menu-img menu-img--placeholder">Image indisponible</div>`;
 
       return `
