@@ -1,4 +1,7 @@
 export const API_BASE = import.meta.env.VITE_API_URL ?? "";
+git add .
+git commit -m "Use VITE_API_URL for backend"
+git push
 
 function getToken() {
   if (typeof window === "undefined") return null;
