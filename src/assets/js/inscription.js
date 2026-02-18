@@ -95,24 +95,26 @@ export function bindInscriptionForm() {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/auth/register", {
+      const res = await fetch(`${API_BASE}/api/auth/register`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify(payload),
       });
 
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        alert(data.message || "Erreur lors de l'inscription.");
-        return;
+        throw new Error(data?.message || `Erreur inscription (${res.status})`);
       }
 
-      alert("✅ Inscription réussie ! Vous pouvez vous connecter.");
+      // succès
+      alert("Compte créé ✅ Vous pouvez vous connecter.");
       window.location.href = "/connexion";
-    } catch (err) {
-      console.error(err);
-      alert("Erreur serveur. Vérifie que Symfony est démarré.");
+    } catch (e) {
+      alert(e.message || "Erreur inscription");
     }
   });
 }
