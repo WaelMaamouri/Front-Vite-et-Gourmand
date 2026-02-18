@@ -1,0 +1,98 @@
+/* 
+   COMPTE
+ */
+
+.compte-page {
+  background: var(--beige-2, #efece6);
+  padding: 40px 0 60px;
+}
+
+/* En-tête page */
+.compte-page h1 {
+  margin: 0 0 10px;
+  font-family: "Playfair Display", serif;
+  font-size: 34px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* sous-titre */
+.compte-intro {
+  margin: 0 0 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Carte principale */
+.compte-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+@media (max-width: 600px) {
+  .compte-card {
+    padding: 16px;
+  }
+}
+
+/* Bloc commande */
+.my-order {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.my-order-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 700px) {
+  .my-order-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Badge statut */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(107, 15, 42, 0.08);
+  color: var(--bordeaux);
+  border: 1px solid rgba(107, 15, 42, 0.18);
+  white-space: nowrap;
+}
+
+/* Texte commande */
+.my-order p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* bouton menu  */
+.my-order .menu-btn {
+  margin-top: 12px;
+}
+
+/* Message */
+.compte-empty {
+  color: #666;
+  font-style: italic;
+  margin: 0;
+}

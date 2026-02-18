@@ -1,0 +1,82 @@
+<section class="menus-page">
+  <div class="container">
+    <header class="menus-header">
+      <h1 class="menus-title">Nos Menus</h1>
+      <p class="menus-subtitle">
+        Découvrez notre sélection de menus pour tous vos événements
+      </p>
+    </header>
+
+    <div class="menus-layout">
+      <aside class="filters-card">
+        <h2 class="filters-title">Fourchettes de prix</h2>
+
+        <div class="filters-price">
+          <input id="filter-minPrix" type="text" placeholder="Min" />
+          <span class="filters-dash">-</span>
+          <input id="filter-maxPrix" type="text" placeholder="Max" />
+        </div>
+
+        <h2 class="filters-title">Thèmes</h2>
+        <div class="filters-list">
+          <label>
+            <input type="checkbox" class="filter-theme" value="Terroir" />
+            Terroir
+          </label>
+
+          <label>
+            <input type="checkbox" class="filter-theme" value="Végétarien" />
+            Végétarien
+          </label>
+
+          <label>
+            <input type="checkbox" class="filter-theme" value="Gastronomique" />
+            Gastronomique
+          </label>
+
+          <label>
+            <input type="checkbox" class="filter-theme" value="Méditerranéen" />
+            Méditerranéen
+          </label>
+
+          <label>
+            <input type="checkbox" class="filter-theme" value="Cocktail" />
+            Cocktail
+          </label>
+
+          <label>
+            <input type="checkbox" class="filter-theme" value="Enfant" />
+            Enfants
+          </label>
+        </div>
+
+        <h2 class="filters-title">Régimes alimentaires</h2>
+        <div class="filters-list">
+          <label>
+            <input type="checkbox" class="filter-regime" value="Classique" />
+            Classique
+          </label>
+
+          <label>
+            <input type="checkbox" class="filter-regime" value="Végétarien" />
+            Végétarien
+          </label>
+        </div>
+
+        <h2 class="filters-title">Nombres de personnes min</h2>
+        <input
+          id="filter-minPersonnes"
+          class="filters-full"
+          type="text"
+          placeholder="Ex: 10"
+        />
+
+        <button class="filters-reset" type="button">
+          Réinitialiser les filtres
+        </button>
+      </aside>
+
+      <section class="cards-grid"></section>
+    </div>
+  </div>
+</section>

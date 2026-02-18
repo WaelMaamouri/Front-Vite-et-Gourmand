@@ -1,0 +1,175 @@
+/* 
+   EMPLOYÉ
+ */
+
+.emp-page {
+  background: var(--beige-2, #efece6);
+  padding: 40px 0 60px;
+}
+
+.emp-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+@media (max-width: 600px) {
+  .emp-card {
+    padding: 16px;
+  }
+}
+
+/* Titre + intro */
+.emp-page h1 {
+  margin: 0 0 10px;
+  font-family: "Playfair Display", serif;
+  font-size: 34px;
+  font-weight: 600;
+  color: #111;
+}
+
+.emp-page p {
+  margin: 0 0 18px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Header filtres */
+.emp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.emp-header label {
+  font-size: 14px;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.emp-header select {
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 0 12px;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.emp-header select:focus {
+  outline: none;
+  border-color: var(--bordeaux);
+}
+
+/* Carte commande */
+.admin-order {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.admin-order-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.admin-order-meta {
+  color: #777;
+  font-size: 12px;
+}
+
+/* Lignes commande */
+.admin-order-lines {
+  display: grid;
+  gap: 6px;
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 12px;
+  line-height: 1.45;
+}
+
+/* Actions */
+.admin-order-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-order-actions select {
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 0 12px;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.admin-order-actions select:focus {
+  outline: none;
+  border-color: var(--bordeaux);
+}
+
+/* Message */
+.admin-msg {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Bouton sauvegarde */
+.emp-save {
+  background: var(--bordeaux);
+  border: 2px solid var(--bordeaux);
+  color: #fff;
+  font-weight: 800;
+  border-radius: 10px;
+  height: 38px;
+  padding: 0 14px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.emp-save:hover,
+.emp-save:focus {
+  background: var(--bordeaux-2);
+  border-color: var(--bordeaux-2);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .emp-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .emp-header select {
+    width: 100%;
+  }
+
+  .admin-order-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-order-actions select,
+  .emp-save {
+    width: 100%;
+  }
+}

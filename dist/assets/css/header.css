@@ -1,0 +1,45 @@
+/* zone actions */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 16px;
+}
+
+/* base bouton */
+.nav .nav-actions a.header-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+
+  text-decoration: none;
+  background: transparent;
+  border: 2px solid var(--bordeaux);
+  color: var(--bordeaux);
+
+  transition: 0.2s ease;
+}
+
+/* hover connexion */
+.nav .nav-actions a.header-auth-btn:hover {
+  background: var(--bordeaux);
+  color: #fff;
+}
+
+/* bouton plein inscription */
+.nav .nav-actions a.header-auth-btn.header-auth-btn--solid {
+  background: var(--bordeaux);
+  color: #fff;
+}
+
+/* hover inscription */
+.nav .nav-actions a.header-auth-btn.header-auth-btn--solid:hover {
+  background: var(--bordeaux-2);
+  border-color: var(--bordeaux-2);
+}

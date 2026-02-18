@@ -1,0 +1,70 @@
+/* 
+   HEADER
+ */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 16px;
+}
+
+/* Boutons auth */
+.nav-actions .header-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+
+  text-decoration: none;
+  background: transparent;
+  border: 2px solid var(--bordeaux);
+  color: var(--bordeaux);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Hover Connexion */
+.nav-actions .header-auth-btn:hover,
+.nav-actions .header-auth-btn:focus {
+  background: rgba(107, 15, 42, 0.08);
+  color: var(--bordeaux);
+}
+
+/* Bouton Inscription */
+
+.nav-actions .header-auth-btn--solid {
+  background: var(--bordeaux);
+  border-color: var(--bordeaux);
+  color: #fff;
+}
+
+.nav-actions .header-auth-btn--solid:hover,
+.nav-actions .header-auth-btn--solid:focus {
+  background: var(--bordeaux-2);
+  border-color: var(--bordeaux-2);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .nav-actions {
+    gap: 10px;
+  }
+
+  .nav-actions .header-auth-btn {
+    padding: 0 14px;
+    font-size: 13px;
+  }
+}

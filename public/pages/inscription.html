@@ -1,0 +1,358 @@
+<section class="inscription-hero">
+  <div class="container">
+    <h1 class="inscription-hero-title">Créer un compte</h1>
+    <p class="inscription-hero-slogan">
+      Rejoignez Vite & Gourmand et profitez d'une expérience personnalisée
+    </p>
+  </div>
+</section>
+
+<section class="inscription-form-section">
+  <div class="container">
+    <div class="inscription-form-card">
+      <form
+        class="inscription-form"
+        action="#"
+        method="post"
+        id="form-inscription"
+      >
+        <div class="inscription-form-grid">
+          <div class="inscription-form-left">
+            <fieldset class="form-block">
+              <legend class="form-block-title">
+                Informations personnelles
+              </legend>
+              <div class="form-block-grid">
+                <div class="form-group">
+                  <label for="prenom" class="form-label">
+                    <span class="form-label-icon" aria-hidden="true">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                    </span>
+                    Prénom *
+                  </label>
+                  <input
+                    type="text"
+                    id="prenom"
+                    name="prenom"
+                    class="form-input"
+                    placeholder="Alice"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="nom" class="form-label">
+                    <span class="form-label-icon" aria-hidden="true">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                    </span>
+                    Nom *
+                  </label>
+                  <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    class="form-input"
+                    placeholder="Adonis"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">
+                    <span class="form-label-icon" aria-hidden="true">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                        />
+                        <polyline points="22,6 12,13 2,6" />
+                      </svg>
+                    </span>
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-input"
+                    placeholder="alice.adonis@email.com"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="telephone" class="form-label">
+                    <span class="form-label-icon" aria-hidden="true">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                        />
+                      </svg>
+                    </span>
+                    Téléphone *
+                  </label>
+                  <input
+                    type="tel"
+                    id="gsm"
+                    name="gsm"
+                    class="form-input"
+                    placeholder="06 12 34 56 78"
+                    required
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-block">
+              <legend class="form-block-title">Adresse de livraison</legend>
+              <div class="form-block-grid form-block-address">
+                <div class="form-group">
+                  <label for="adresse" class="form-label">
+                    <span class="form-label-icon" aria-hidden="true">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                        />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                    </span>
+                    Adresse *
+                  </label>
+                  <input
+                    type="text"
+                    id="adresse"
+                    name="adresse"
+                    class="form-input"
+                    placeholder="12 Rue Sainte Catherine"
+                    required
+                  />
+                </div>
+                <div class="form-group form-group-ville">
+                  <label for="ville" class="form-label">Ville *</label>
+                  <input
+                    type="text"
+                    id="ville"
+                    name="ville"
+                    class="form-input"
+                    placeholder="Bordeaux"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="code_postal" class="form-label"
+                    >Code postal *</label
+                  >
+                  <input
+                    type="text"
+                    id="code_postal"
+                    name="code_postal"
+                    class="form-input"
+                    placeholder="33000"
+                    required
+                  />
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="inscription-form-right">
+            <fieldset class="form-block">
+              <legend class="form-block-title">Sécurité</legend>
+              <div class="form-group">
+                <label for="mot_de_passe" class="form-label">
+                  <span class="form-label-icon" aria-hidden="true">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                  </span>
+                  Mot de passe *
+                </label>
+                <input
+                  type="password"
+                  id="mot_de_passe"
+                  name="mot_de_passe"
+                  class="form-input"
+                  placeholder="********"
+                  required
+                  autocomplete="new-password"
+                />
+              </div>
+              <div class="form-group">
+                <label for="confirmation_mot_de_passe" class="form-label">
+                  <span class="form-label-icon" aria-hidden="true">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                  </span>
+                  Confirmation de mot de passe *
+                </label>
+                <input
+                  type="password"
+                  id="confirmation_mot_de_passe"
+                  name="confirmation_mot_de_passe"
+                  class="form-input"
+                  placeholder="********"
+                  required
+                  autocomplete="new-password"
+                />
+              </div>
+              <div class="form-group form-group-checkbox">
+                <input
+                  type="checkbox"
+                  id="cgu"
+                  name="cgu"
+                  class="form-checkbox"
+                  required
+                />
+                <label for="cgu" class="form-label-checkbox">
+                  J'accepte les
+                  <a href="#" class="form-link"
+                    >conditions générales d'utilisation</a
+                  >
+                  et la
+                  <a href="#" class="form-link">politique de confidentialité</a>
+                  *
+                </label>
+              </div>
+              <div class="form-group form-group-checkbox">
+                <input
+                  type="checkbox"
+                  id="newsletter"
+                  name="newsletter"
+                  class="form-checkbox"
+                />
+                <label for="newsletter" class="form-label-checkbox">
+                  Je souhaite recevoir les offres et actualités de Vite &
+                  Gourmand
+                </label>
+              </div>
+              <p class="form-login-prompt">
+                Vous avez déjà un compte ?
+                <a href="/connexion" class="form-link" data-link
+                  >Se connecter</a
+                >
+              </p>
+            </fieldset>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-solid btn-inscription">
+            Créer mon compte
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <section class="inscription-benefits">
+      <div class="inscription-benefits-grid">
+        <article class="inscription-benefit">
+          <div class="inscription-benefit-icon" aria-hidden="true">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <h3 class="inscription-benefit-title">Données sécurisées</h3>
+          <p class="inscription-benefit-text">
+            Vos informations sont protégées
+          </p>
+        </article>
+        <article class="inscription-benefit">
+          <div class="inscription-benefit-icon" aria-hidden="true">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <h3 class="inscription-benefit-title">Inscription gratuite</h3>
+          <p class="inscription-benefit-text">Aucun frais d'adhésion</p>
+        </article>
+        <article class="inscription-benefit">
+          <div class="inscription-benefit-icon" aria-hidden="true">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </div>
+          <h3 class="inscription-benefit-title">Offres exclusives</h3>
+          <p class="inscription-benefit-text">Accès aux promotions membres</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</section>

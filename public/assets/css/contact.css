@@ -1,0 +1,289 @@
+/* 
+   CONTACT
+ */
+
+.contact-hero {
+  background: var(--bordeaux);
+  color: #fff;
+  padding: 48px 0;
+  text-align: center;
+}
+
+.contact-hero-title {
+  margin: 0 0 12px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 42px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.contact-hero-slogan {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.95;
+  color: #fff;
+}
+
+.contact-section {
+  padding: 40px 0 56px;
+  background: var(--beige-2, #efece6);
+}
+
+.contact-card {
+  background: #f8f6f2;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 34px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 600px) {
+  .contact-card {
+    padding: 22px;
+  }
+}
+
+.contact-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.contact-divider {
+  background: rgba(0, 0, 0, 0.12);
+  width: 1px;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .contact-card-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-divider {
+    display: none;
+  }
+}
+
+.contact-block-title {
+  margin: 0 0 18px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #111;
+}
+
+.contact-center {
+  text-align: center;
+}
+
+/* Champs */
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.contact-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.contact-field input,
+.contact-field textarea,
+#cmd-menu {
+  width: 100%;
+  background: #e7e7e7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #111;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.contact-field input,
+#cmd-menu {
+  height: 44px;
+}
+
+.contact-field textarea {
+  resize: vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus,
+#cmd-menu:focus {
+  outline: none;
+  border-color: var(--bordeaux);
+  background: #fff;
+}
+
+.contact-field input:hover,
+.contact-field textarea:hover,
+#cmd-menu:hover {
+  background: #eee;
+}
+
+/* Select menu */
+#cmd-menu {
+  cursor: pointer;
+  appearance: auto;
+}
+
+/* Bouton */
+.contact-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 10px;
+  border: 2px solid var(--bordeaux);
+  background: var(--bordeaux);
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.contact-btn:hover,
+.contact-btn:focus {
+  background: var(--bordeaux-2);
+  border-color: var(--bordeaux-2);
+  color: #fff;
+}
+
+.contact-form-msg {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: #333;
+}
+
+/* Infos */
+.contact-card-infos {
+  padding: 28px;
+}
+
+@media (max-width: 600px) {
+  .contact-card-infos {
+    padding: 0;
+  }
+}
+
+.contact-infos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 22px;
+  align-items: start;
+  margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+  .contact-infos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-info-line {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Horaires */
+.contact-hours {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.contact-hours-title {
+  margin: 0 0 8px;
+  font-weight: 800;
+  font-size: 16px;
+  color: #111;
+}
+
+.contact-hours p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Map */
+.contact-map-title {
+  margin: 0 0 8px;
+  font-weight: 800;
+  color: #111;
+}
+
+.contact-map-box {
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  background: #eee;
+}
+
+.contact-map-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Benefits */
+.contact-benefits {
+  padding: 10px 0 0;
+}
+
+.contact-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .contact-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-benefit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-benefit-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(107, 15, 42, 0.15);
+  color: var(--bordeaux);
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+}
+
+.contact-benefit-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: #111;
+}
+
+.contact-benefit-text {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}

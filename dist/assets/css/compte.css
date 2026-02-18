@@ -1,0 +1,75 @@
+.compte-page {
+  background: var(--beige-2);
+  padding: 40px 0 60px;
+}
+
+.compte-card {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.compte-page h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 34px;
+  margin: 0 0 10px;
+}
+
+.compte-page > .container > p {
+  margin: 0 0 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.my-order {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.my-order-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(107, 15, 42, 0.08);
+  color: var(--bordeaux);
+  border: 1px solid rgba(107, 15, 42, 0.18);
+}
+
+.my-order p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.my-order .menu-btn {
+  margin-top: 12px;
+}
+
+.compte-page .container > div > p {
+  color: #666;
+  font-style: italic;
+}
+
+@media (max-width: 700px) {
+  .my-order-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

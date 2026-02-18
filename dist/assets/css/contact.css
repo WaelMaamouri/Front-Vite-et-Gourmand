@@ -1,0 +1,274 @@
+.contact-hero {
+  background: var(--bordeaux);
+  color: #fff;
+  padding: 48px 0;
+  text-align: center;
+}
+
+.contact-hero-title {
+  margin: 0 0 12px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 42px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.contact-hero-slogan {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.95;
+  color: #fff;
+}
+
+.contact-section {
+  padding: 40px 0 56px;
+  background: var(--beige-2, #efece6);
+}
+
+.contact-card {
+  background: #f8f6f2;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 34px;
+  margin-bottom: 30px;
+}
+
+.contact-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.contact-divider {
+  background: rgba(0, 0, 0, 0.12);
+  width: 1px;
+  height: 100%;
+}
+
+.contact-block-title {
+  margin: 0 0 18px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #111;
+}
+
+.contact-center {
+  text-align: center;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.contact-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  background: #e7e7e7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #111;
+}
+
+.contact-field input {
+  height: 44px;
+}
+
+.contact-field textarea {
+  resize: vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  outline: none;
+  border-color: var(--bordeaux);
+  background: #fff;
+}
+
+.contact-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--bordeaux);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+  color: #fff !important;
+}
+
+.contact-btn-solid {
+  background: var(--bordeaux);
+}
+
+.contact-btn-solid:hover {
+  background: var(--bordeaux-2);
+  border-color: var(--bordeaux-2);
+  color: #fff !important;
+}
+
+.contact-form-msg {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.contact-card-infos {
+  padding: 28px;
+}
+
+.contact-infos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 22px;
+  align-items: start;
+  margin-top: 14px;
+}
+
+.contact-info-line {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.contact-hours {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.contact-hours-title {
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #111;
+}
+
+.contact-hours p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.contact-map-title {
+  margin: 0 0 8px;
+  font-weight: 700;
+  color: #111;
+}
+
+.contact-map-box {
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  background: #eee;
+}
+
+.contact-map-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-benefits {
+  padding: 10px 0 0;
+}
+
+.contact-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-benefit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-benefit-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(107, 15, 42, 0.15);
+  color: var(--bordeaux);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.contact-benefit-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: #111;
+}
+
+.contact-benefit-text {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+@media (max-width: 900px) {
+  .contact-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-divider {
+    display: none;
+  }
+
+  .contact-infos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .contact-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#cmd-menu.form-input,
+#cmd-menu {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  font-size: 15px;
+  color: #111;
+  background: #eee;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  appearance: auto;
+}
+
+#cmd-menu:focus {
+  outline: none;
+  border-color: var(--bordeaux);
+  background: #fff;
+}
+
+#cmd-menu:hover {
+  background: #e8e8e8;
+}
