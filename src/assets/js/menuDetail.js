@@ -38,11 +38,10 @@ function renderList(title, items) {
  * Construit l’affichage complet du menu
  */
 function renderMenuDetail(container, m) {
-  const imgUrl = assetUrl(m.image);
+      const imgUrl = assetUrl(m.image);
 
-  const img = imgUrl
-    ? `<img class="menu-img" src="${imgUrl}" alt="${m.titre || "Menu"}">`
-    : `<div class="menu-img menu-img--placeholder">Image indisponible</div>`;
+      const img = imgUrl
+        ? `<img class="suggestion-img" src="${imgUrl}" alt="${m.titre}">`
 
   const entrees = splitLines(m.entrees);
   const plats = splitLines(m.plats);
@@ -112,8 +111,9 @@ function renderSuggestions(container, menus, currentId) {
       const imgUrl = assetUrl(m.image);
 
       const img = imgUrl
-        ? `<img class="menu-img" src="${imgUrl}" alt="${m.titre || "Menu"}">`
-        : `<div class="menu-img menu-img--placeholder">Image indisponible</div>`;
+        ? `<img class="suggestion-img" src="${imgUrl}" alt="${m.titre}">`
+        : `<div class="suggestion-img suggestion-img--placeholder">Image</div>`;
+
       return `
         <article class="suggestion-card">
           ${img}
