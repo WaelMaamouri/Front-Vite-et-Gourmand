@@ -50,8 +50,10 @@ function buildQueryFromFilters() {
 function renderMenus(grid, menus) {
   grid.innerHTML = (menus || [])
     .map((m) => {
-      const img = m.image
-        ? `<img class="menu-img" src="${m.image}" alt="${m.titre || "Menu"}">`
+      const imgUrl = assetUrl(m.image);
+
+      const img = imgUrl
+        ? `<img class="menu-img" src="${imgUrl}" alt="${m.titre || "Menu"}">`
         : `<div class="menu-img menu-img--placeholder">Image indisponible</div>`;
 
       return `
