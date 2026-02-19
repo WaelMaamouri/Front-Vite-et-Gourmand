@@ -1,4 +1,13 @@
-import { apiGet } from "./api.js";
+import { apiGet, API_BASE as RAW_API_BASE } from "./api.js";
+
+const API_BASE = (RAW_API_BASE || "").replace(/\/$/, "");
+
+function assetUrl(path) {
+  if (!path) return "";
+  if (/^https?:\/\//i.test(path)) return path;
+  if (path.startsWith("/")) return `${API_BASE}${path}`;
+  return `${API_BASE}/${path}`;
+}
 
 /**
  * Découpe un texte en plusieurs lignes propres
@@ -38,10 +47,11 @@ function renderList(title, items) {
  * Construit l’affichage complet du menu
  */
 function renderMenuDetail(container, m) {
-      const imgUrl = assetUrl(m.image);
+  const imgUrl = assetUrl(m.image);
 
-      const img = imgUrl
-        ? `<img class="suggestion-img" src="${imgUrl}" alt="${m.titre}">`
+  const img = imgUrl
+    ? `<img class="menu-detail-img" src="${imgUrl}" alt="${m.titre}">`
+    : "";
 
   const entrees = splitLines(m.entrees);
   const plats = splitLines(m.plats);
