@@ -1,10 +1,18 @@
-import { apiGet, API_BASE } from "./api.js";
+import { apiGet, API_BASE as RAW_API_BASE } from "./api.js";
+
+// Normalise: enlève le slash final pour éviter //assets...
+const API_BASE = (RAW_API_BASE || "").replace(/\/$/, "");
 
 function assetUrl(path) {
   if (!path) return "";
-  if (path.startsWith("http")) return path;
-  return `${API_BASE}${path}`;
+
+  if (/^https?:\/\//i.test(path)) return path;
+
+  // Si c’est un chemin relatif ou absolu => on le colle à l’API_BASE
+  if (path.startsWith("/")) return `${API_BASE}${path}`;
+  return `${API_BASE}/${path}`;
 }
+
 /**
  * Récupère la valeur sélectionnée d’un groupe.
  */
@@ -40,10 +48,12 @@ function buildQueryFromFilters() {
  * Affiche les menus dans la grille HTML.
  */
 function renderMenus(grid, menus) {
-  grid.innerHTML = menus
+  grid.innerHTML = (menus || [])
     .map((m) => {
-      const img = m.image
-        ? `<img class="menu-img" src="${API_BASE}${m.image}" alt="${m.titre}">`
+      const imgUrl = assetUrl(m.image);
+
+      const img = imgUrl
+        ? `<img class="menu-img" src="${imgUrl}" alt="${m.titre || "Menu"}">`
         : `<div class="menu-img menu-img--placeholder">Image indisponible</div>`;
 
       return `
@@ -55,13 +65,13 @@ function renderMenus(grid, menus) {
               <span class="tag">${m.regime ?? ""}</span>
             </div>
 
-            <h3 class="menu-name">${m.titre}</h3>
+            <h3 class="menu-name">${m.titre ?? ""}</h3>
             <p class="menu-desc">${m.description ?? ""}</p>
 
             <p class="menu-from">A partir de:</p>
             <div class="menu-bottom">
-              <p class="menu-price">${m.prixMin}€<span>/ pers</span></p>
-              <p class="menu-min">👥 ${m.nbPersonnesMin} pers. min</p>
+              <p class="menu-price">${m.prixMin ?? ""}€<span>/ pers</span></p>
+              <p class="menu-min">👥 ${m.nbPersonnesMin ?? ""} pers. min</p>
             </div>
 
             <a class="menu-btn" href="/menu?id=${m.id}" data-link>Voir les détails</a>
@@ -92,7 +102,7 @@ async function fetchAndRender() {
 }
 
 /**
- * Branche les événements sur les filtres :
+ * Branche les événements sur les filtres.
  */
 function bindFilters() {
   const resetBtn = document.querySelector(".filters-reset");
@@ -123,10 +133,6 @@ function bindFilters() {
     .querySelectorAll(".filter-theme, .filter-regime")
     .forEach((cb) => cb.addEventListener("change", fetchAndRender));
 }
-
-/**
- * Point d’entrée de la page menus :
- */
 export async function loadMenusPage() {
   bindFilters();
   fetchAndRender();
