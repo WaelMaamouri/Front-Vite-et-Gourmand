@@ -5,8 +5,12 @@ const API_BASE = (RAW_API_BASE || "").replace(/\/$/, "");
 
 function assetUrl(path) {
   if (!path) return "";
-  if (path.startsWith("http://") || path.startsWith("https://")) return path;
-  return `${API_BASE}${path.startsWith("/") ? "" : "/"}${path}`;
+
+  if (/^https?:\/\//i.test(path)) return path;
+
+  // Si c’est un chemin relatif ou absolu => on le colle à l’API_BASE
+  if (path.startsWith("/")) return `${API_BASE}${path}`;
+  return `${API_BASE}/${path}`;
 }
 
 /**
