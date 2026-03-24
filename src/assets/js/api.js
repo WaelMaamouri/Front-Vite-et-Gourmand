@@ -64,6 +64,24 @@ export async function apiPost(path, body) {
   return parseJsonOrThrow(res, "POST");
 }
 
+/**
+ * POST multipart/form-data (ex. upload fichier).
+ * Ne pas définir Content-Type : le navigateur ajoute le boundary.
+ */
+export async function apiPostForm(path, formData) {
+  const token = getToken();
+  const headers = { Accept: "application/json" };
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  const res = await fetch(API_BASE + path, {
+    method: "POST",
+    headers,
+    credentials: "omit",
+    body: formData,
+  });
+  return parseJsonOrThrow(res, "POST");
+}
+
 export async function apiPatch(path, body) {
   const res = await fetch(API_BASE + path, {
     method: "PATCH",

@@ -124,12 +124,26 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="m-image">Image (path)</label>
+                <label class="form-label" for="m-image-file"
+                  >Image du menu</label
+                >
                 <input
                   class="form-input"
-                  id="m-image"
-                  type="text"
-                  placeholder="/assets/img/menus/..."
+                  id="m-image-file"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/gif"
+                />
+                <p class="form-hint admin-form-hint">
+                  Choisissez une image sur votre ordinateur. Elle est envoyée au
+                  serveur ; l’URL renvoyée est enregistrée avec le menu.
+                </p>
+                <img
+                  id="m-image-preview"
+                  class="admin-menu-image-preview"
+                  alt="Aperçu"
+                  width="200"
+                  height="120"
+                  hidden
                 />
               </div>
 

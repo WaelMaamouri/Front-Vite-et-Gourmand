@@ -1,4 +1,85 @@
-import { apiGet, apiPost, apiPatch, apiDelete } from "./api.js";
+import {
+  apiGet,
+  apiPost,
+  apiPostForm,
+  apiPatch,
+  apiDelete,
+} from "./api.js";
+
+/** Taille max image menu (upload). */
+const MAX_MENU_IMAGE_BYTES = 5 * 1024 * 1024;
+
+let menuImagePreviewObjectUrl = null;
+
+function extractUploadedImagePath(data) {
+  if (data == null) return "";
+  if (typeof data === "string") return data;
+  const o = data.data && typeof data.data === "object" ? data.data : data;
+  const path =
+    o.path ||
+    o.image ||
+    o.url ||
+    o.filePath ||
+    o.location ||
+    (typeof o.file === "string" ? o.file : "");
+  return typeof path === "string" ? path : "";
+}
+
+/**
+ * POST multipart vers l’API : champ fichier attendu : "file".
+ * Réponse JSON : au moins un de path | image | url | filePath | location.
+ */
+async function uploadMenuImageFile(file) {
+  if (file.size > MAX_MENU_IMAGE_BYTES) {
+    throw new Error("Image trop volumineuse (maximum 5 Mo).");
+  }
+  const fd = new FormData();
+  fd.append("file", file);
+  const data = await apiPostForm("/api/admin/menus/upload", fd);
+  const path = extractUploadedImagePath(data);
+  if (!path) {
+    throw new Error(
+      "Réponse serveur inattendue : fournissez path, image ou url après l’upload.",
+    );
+  }
+  return path;
+}
+
+function resetMenuImagePreview() {
+  const preview = document.getElementById("m-image-preview");
+  const input = document.getElementById("m-image-file");
+  if (menuImagePreviewObjectUrl) {
+    URL.revokeObjectURL(menuImagePreviewObjectUrl);
+    menuImagePreviewObjectUrl = null;
+  }
+  if (preview) {
+    preview.hidden = true;
+    preview.removeAttribute("src");
+  }
+  if (input) input.value = "";
+}
+
+function bindMenuImagePreview() {
+  const input = document.getElementById("m-image-file");
+  const preview = document.getElementById("m-image-preview");
+  if (!input || !preview) return;
+
+  input.addEventListener("change", () => {
+    if (menuImagePreviewObjectUrl) {
+      URL.revokeObjectURL(menuImagePreviewObjectUrl);
+      menuImagePreviewObjectUrl = null;
+    }
+    const f = input.files?.[0];
+    if (!f) {
+      preview.hidden = true;
+      preview.removeAttribute("src");
+      return;
+    }
+    menuImagePreviewObjectUrl = URL.createObjectURL(f);
+    preview.src = menuImagePreviewObjectUrl;
+    preview.hidden = false;
+  });
+}
 
 /**
  * Sécurise les textes affichés dans le HTML (évite l’injection de code).
@@ -254,12 +335,26 @@ function bindMenuForm(refresh) {
     const nbPersonnesMin = Number(document.getElementById("m-nb")?.value || 0);
     const theme = document.getElementById("m-theme")?.value.trim() || "";
     const regime = document.getElementById("m-regime")?.value.trim() || "";
-    const image = document.getElementById("m-image")?.value.trim() || "";
+    const imageFile = document.getElementById("m-image-file")?.files?.[0];
     const description = document.getElementById("m-desc")?.value.trim() || "";
     const conditions = document.getElementById("m-cond")?.value.trim() || "";
 
     if (!titre || prixMin <= 0 || nbPersonnesMin <= 0 || !description) {
       alert("Champs menu invalides (titre, prix, nb min, description).");
+      return;
+    }
+
+    let image = "";
+    try {
+      if (imageFile) {
+        image = await uploadMenuImageFile(imageFile);
+      }
+    } catch (err) {
+      console.error(err);
+      alert(
+        err.message ||
+          "Échec de l’envoi de l’image. Vérifiez POST /api/admin/menus/upload (multipart, champ file).",
+      );
       return;
     }
 
@@ -277,6 +372,7 @@ function bindMenuForm(refresh) {
     try {
       await apiPost("/api/admin/menus", payload);
       form.reset();
+      resetMenuImagePreview();
       await refresh();
     } catch (err) {
       console.error(err);
@@ -610,6 +706,7 @@ export async function loadAdminPage() {
 
   bindHoraireForm(refreshHoraires);
   bindMenuForm(refreshMenus);
+  bindMenuImagePreview();
 
   const filter = document.getElementById("admin-filter-statut");
   if (filter) filter.addEventListener("change", refreshOrders);
