@@ -123,7 +123,7 @@ async function render(pathname) {
     mod.loadLoginPage();
   }
 
-  if (pathname === "/avis") {
+  if (route.url === "/avis") {
     const mod = await import("../avisPage.js");
     mod.loadAvisPage();
   }

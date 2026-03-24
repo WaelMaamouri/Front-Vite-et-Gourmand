@@ -7,6 +7,18 @@ export const allRoutes = [
   new Route("/menus", "Menus", "/pages/menus.html", []),
   new Route("/contact", "Contact", "/pages/contact.html", []),
   new Route("/connexion", "Connexion", "/pages/connexion.html", []),
+  new Route(
+    "/forgot-password",
+    "Mot de passe oublié",
+    "/pages/forgot-password.html",
+    [],
+  ),
+  new Route(
+    "/reset-password",
+    "Réinitialiser le mot de passe",
+    "/pages/reset-password.html",
+    [],
+  ),
   new Route("/inscription", "Inscription", "/pages/inscription.html", []),
   new Route("/menu", "Détail menu", "/pages/menu-detail.html", []),
   new Route("/compte", "Mon compte", "/pages/compte.html", []),
