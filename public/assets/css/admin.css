@@ -92,10 +92,11 @@
   max-width: 100%;
   width: auto;
   height: auto;
-  max-height: 160px;
+  max-height: 180px;
   object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  border: 1px solid #e3e3e3;
+  box-shadow: var(--shadow);
 }
 
 .admin-item-sub {

@@ -277,3 +277,339 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+/* ------------------------------------------------------------------
+   Détail menu + suggestions (aligné cartes .menu-card / .filters-card)
+   ------------------------------------------------------------------ */
+
+.menu-detail-page {
+  background: var(--beige-2);
+  padding: 28px 0 48px;
+}
+
+.menu-detail-breadcrumb {
+  margin: 0 0 20px;
+  font-size: 14px;
+}
+
+.menu-detail-breadcrumb a {
+  color: var(--bordeaux);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.menu-detail-breadcrumb a:hover {
+  color: var(--bordeaux-2);
+}
+
+.menu-detail-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e3e3e3;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.menu-detail-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+  gap: 0;
+  align-items: stretch;
+}
+
+.menu-detail-media {
+  background: #eee;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+.menu-detail-img {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.menu-detail-main {
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.menu-detail-title {
+  margin: 0 0 10px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #111;
+}
+
+.menu-detail-desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #555;
+}
+
+.menu-detail-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 16px 24px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.menu-detail-price {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--bordeaux);
+  line-height: 1;
+}
+
+.menu-detail-price span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #666;
+}
+
+.menu-detail-min {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.menu-detail-conditions {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: rgba(217, 214, 207, 0.35);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.menu-detail-conditions-title {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bordeaux);
+}
+
+.menu-detail-conditions-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444;
+}
+
+.menu-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.menu-detail-extra {
+  padding: 28px 28px 32px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: #faf9f7;
+}
+
+.menu-detail-subtitle {
+  margin: 0 0 10px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+}
+
+.menu-detail-accroche {
+  margin: 0 0 22px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.menu-detail-subsubtitle {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+}
+
+.menu-detail-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.menu-detail-col-title {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--bordeaux);
+}
+
+.menu-detail-col ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #444;
+}
+
+.menu-detail-col li {
+  margin-bottom: 6px;
+}
+
+/* Suggestions (même langage que .menu-card) */
+.menu-suggestions {
+  background: #fff;
+  padding: 40px 0 56px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.menu-suggestions-title {
+  max-width: var(--container);
+  margin: 0 auto 24px;
+  padding: 0 20px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
+  color: #111;
+}
+
+.menu-suggestions-grid {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.suggestion-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #e3e3e3;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.suggestion-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.suggestion-img--placeholder {
+  height: 160px;
+  display: grid;
+  place-items: center;
+  background: #eee;
+  color: #777;
+  font-size: 13px;
+  border-bottom: 1px solid #ddd;
+}
+
+.suggestion-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
+}
+
+.suggestion-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.suggestion-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+}
+
+.suggestion-price {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bordeaux);
+}
+
+.suggestion-link {
+  margin-top: auto;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bordeaux);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.suggestion-link:hover {
+  color: var(--bordeaux-2);
+}
+
+@media (max-width: 960px) {
+  .menu-detail-top {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-detail-media {
+    min-height: 220px;
+  }
+
+  .menu-detail-img {
+    min-height: 220px;
+  }
+
+  .menu-detail-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-suggestions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-detail-title {
+    font-size: 26px;
+  }
+
+  .menu-detail-main {
+    padding: 20px 18px;
+  }
+
+  .menu-detail-extra {
+    padding: 22px 18px 28px;
+  }
+
+  .menu-suggestions-grid {
+    grid-template-columns: 1fr;
+  }
+}
