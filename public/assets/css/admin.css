@@ -72,6 +72,18 @@
   padding: 14px;
 }
 
+.admin-item--editing {
+  outline: 2px solid var(--bordeaux, #722f37);
+  outline-offset: 2px;
+}
+
+.admin-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
 .admin-item-title {
   margin: 0 0 6px;
   font-weight: 800;

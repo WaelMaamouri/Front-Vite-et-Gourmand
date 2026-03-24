@@ -3,8 +3,24 @@ import {
   apiPost,
   apiPostForm,
   apiPatch,
+  apiPut,
   apiDelete,
+  API_BASE as RAW_API_BASE,
 } from "./api.js";
+
+const API_BASE = (RAW_API_BASE || "").replace(/\/$/, "");
+
+function menuAssetUrl(path) {
+  if (!path) return "";
+  if (/^https?:\/\//i.test(path)) return path;
+  if (path.startsWith("/")) return `${API_BASE}${path}`;
+  return `${API_BASE}/${path}`;
+}
+
+/** Derniers menus admin (pour le bouton « Modifier »). */
+let lastAdminMenus = [];
+let menuEditingId = null;
+let menuEditingImage = "";
 
 /** Taille max image menu (upload). */
 const MAX_MENU_IMAGE_BYTES = 5 * 1024 * 1024;
@@ -310,6 +326,7 @@ function renderMenus(container, menus) {
         <p class="admin-item-line"><strong>Min :</strong> ${esc(m.nbPersonnesMin)} pers</p>
 
         <div class="admin-item-actions">
+          <button class="btn btn-solid admin-menu-edit" type="button">Modifier</button>
           <button class="btn btn-danger-solid admin-menu-delete" type="button">Supprimer</button>
         </div>
 
@@ -320,12 +337,32 @@ function renderMenus(container, menus) {
     .join("");
 }
 
+function setMenuFormCreateMode() {
+  menuEditingId = null;
+  menuEditingImage = "";
+  const hid = document.getElementById("m-menu-id");
+  if (hid) hid.value = "";
+  const cancel = document.getElementById("m-menu-cancel-edit");
+  if (cancel) cancel.hidden = true;
+  const sub = document.getElementById("m-menu-submit");
+  if (sub) sub.textContent = "Créer menu";
+}
+
 /**
- * Gère le formulaire de création de menu (validation + POST).
+ * Gère le formulaire de création / édition de menu (POST ou PUT).
  */
 function bindMenuForm(refresh) {
   const form = document.getElementById("admin-menu-form");
   if (!form) return;
+
+  const cancelBtn = document.getElementById("m-menu-cancel-edit");
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", () => {
+      form.reset();
+      resetMenuImagePreview();
+      setMenuFormCreateMode();
+    });
+  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -358,6 +395,11 @@ function bindMenuForm(refresh) {
       return;
     }
 
+    const editing = menuEditingId != null && menuEditingId > 0;
+    if (editing && !image && menuEditingImage) {
+      image = menuEditingImage;
+    }
+
     const payload = {
       titre,
       prixMin,
@@ -370,14 +412,87 @@ function bindMenuForm(refresh) {
     };
 
     try {
-      await apiPost("/api/admin/menus", payload);
+      if (editing) {
+        await apiPut(`/api/admin/menus/${menuEditingId}`, payload);
+      } else {
+        await apiPost("/api/admin/menus", payload);
+      }
       form.reset();
       resetMenuImagePreview();
+      setMenuFormCreateMode();
       await refresh();
     } catch (err) {
       console.error(err);
-      alert(err.message || "Erreur création menu");
+      alert(err.message || (editing ? "Erreur mise à jour menu" : "Erreur création menu"));
     }
+  });
+}
+
+/**
+ * Remplit le formulaire pour éditer un menu existant.
+ */
+function bindMenuEditClicks(container) {
+  container.addEventListener("click", (e) => {
+    const btn = e.target.closest(".admin-menu-edit");
+    if (!btn) return;
+
+    const card = e.target.closest("[data-menu-id]");
+    const id = Number(card?.dataset?.menuId || 0);
+    if (!id) return;
+
+    const menu = lastAdminMenus.find((m) => Number(m.id) === id);
+    if (!menu) return;
+
+    menuEditingId = id;
+    menuEditingImage = typeof menu.image === "string" ? menu.image : "";
+
+    const hid = document.getElementById("m-menu-id");
+    if (hid) hid.value = String(id);
+
+    const setVal = (elId, v) => {
+      const el = document.getElementById(elId);
+      if (el) el.value = v ?? "";
+    };
+
+    setVal("m-titre", menu.titre);
+    setVal("m-prix", menu.prixMin ?? "");
+    setVal("m-nb", menu.nbPersonnesMin ?? "");
+    setVal("m-theme", menu.theme ?? "");
+    setVal("m-regime", menu.regime ?? "");
+    setVal("m-desc", menu.description ?? "");
+    setVal("m-cond", menu.conditions ?? "");
+
+    const fileInput = document.getElementById("m-image-file");
+    if (fileInput) fileInput.value = "";
+
+    const preview = document.getElementById("m-image-preview");
+    if (preview) {
+      const url = menuAssetUrl(menuEditingImage);
+      if (url) {
+        preview.src = url;
+        preview.hidden = false;
+      } else {
+        preview.removeAttribute("src");
+        preview.hidden = true;
+      }
+    }
+
+    if (menuImagePreviewObjectUrl) {
+      URL.revokeObjectURL(menuImagePreviewObjectUrl);
+      menuImagePreviewObjectUrl = null;
+    }
+
+    const cancel = document.getElementById("m-menu-cancel-edit");
+    if (cancel) cancel.hidden = false;
+    const sub = document.getElementById("m-menu-submit");
+    if (sub) sub.textContent = "Enregistrer les modifications";
+
+    container.querySelectorAll(".admin-item").forEach((el) => {
+      el.classList.remove("admin-item--editing");
+    });
+    card.classList.add("admin-item--editing");
+
+    document.getElementById("m-titre")?.focus();
   });
 }
 
@@ -396,6 +511,12 @@ function bindMenuActions(container, refresh) {
 
     try {
       await apiDelete(`/api/admin/menus/${id}`);
+      if (menuEditingId === id) {
+        const form = document.getElementById("admin-menu-form");
+        form?.reset();
+        resetMenuImagePreview();
+        setMenuFormCreateMode();
+      }
       await refresh();
     } catch (err) {
       console.error(err);
@@ -668,9 +789,11 @@ export async function loadAdminPage() {
     menusBox.innerHTML = "<p>Chargement...</p>";
     try {
       const data = await fetchMenusAdmin();
+      lastAdminMenus = Array.isArray(data) ? data : [];
       renderMenus(menusBox, data);
     } catch (err) {
       console.error(err);
+      lastAdminMenus = [];
       menusBox.innerHTML = "<p>Erreur chargement menus.</p>";
     }
   };
@@ -701,10 +824,14 @@ export async function loadAdminPage() {
 
   if (avisBox) bindAvisActions(avisBox, refreshAvis);
   if (horairesBox) bindHoraireActions(horairesBox, refreshHoraires);
-  if (menusBox) bindMenuActions(menusBox, refreshMenus);
+  if (menusBox) {
+    bindMenuActions(menusBox, refreshMenus);
+    bindMenuEditClicks(menusBox);
+  }
   if (ordersBox) bindOrdersActions(ordersBox, refreshOrders);
 
   bindHoraireForm(refreshHoraires);
+  setMenuFormCreateMode();
   bindMenuForm(refreshMenus);
   bindMenuImagePreview();
 

@@ -63,6 +63,8 @@
             <legend class="form-block-title">Menus</legend>
 
             <form id="admin-menu-form" class="admin-form">
+              <input type="hidden" id="m-menu-id" value="" />
+
               <div class="form-group">
                 <label class="form-label" for="m-titre">Titre *</label>
                 <input
@@ -167,7 +169,17 @@
               </div>
 
               <div class="form-actions">
-                <button class="btn btn-solid" type="submit">Créer menu</button>
+                <button
+                  class="btn btn-outline"
+                  type="button"
+                  id="m-menu-cancel-edit"
+                  hidden
+                >
+                  Annuler l’édition
+                </button>
+                <button class="btn btn-solid" type="submit" id="m-menu-submit">
+                  Créer menu
+                </button>
               </div>
             </form>
 
