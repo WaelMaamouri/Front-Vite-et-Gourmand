@@ -21,6 +21,17 @@ function getSelectedValue(selector) {
   return checked ? checked.value : "";
 }
 
+function bindSingleSelectCheckboxGroup(selector) {
+  document.querySelectorAll(selector).forEach((cb) => {
+    cb.addEventListener("change", () => {
+      if (!cb.checked) return;
+      document.querySelectorAll(selector).forEach((other) => {
+        if (other !== cb) other.checked = false;
+      });
+    });
+  });
+}
+
 /**
  * Construit la query string à partir des filtres saisis par l’utilisateur.
  */
@@ -106,6 +117,9 @@ async function fetchAndRender() {
  */
 function bindFilters() {
   const resetBtn = document.querySelector(".filters-reset");
+
+  bindSingleSelectCheckboxGroup(".filter-theme");
+  bindSingleSelectCheckboxGroup(".filter-regime");
 
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
