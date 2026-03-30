@@ -62,45 +62,54 @@ async function uploadMenuImageFile(file) {
 }
 
 function resetMenuImagePreview() {
-  const preview = document.getElementById("m-image-preview");
-  const previewLabel = document.getElementById("m-image-preview-label");
+  const container = document.getElementById("m-image-preview-container");
   const input = document.getElementById("m-image-file");
+  
   if (menuImagePreviewObjectUrl) {
     URL.revokeObjectURL(menuImagePreviewObjectUrl);
     menuImagePreviewObjectUrl = null;
   }
-  if (preview) {
-    preview.hidden = true;
-    preview.removeAttribute("src");
+  
+  if (container) {
+    container.innerHTML = "";
   }
-  if (previewLabel) {
-    previewLabel.hidden = true;
+  
+  if (input) {
+    input.value = "";
   }
-  if (input) input.value = "";
 }
 
 function bindMenuImagePreview() {
   const input = document.getElementById("m-image-file");
-  const preview = document.getElementById("m-image-preview");
-  const previewLabel = document.getElementById("m-image-preview-label");
-  if (!input || !preview) return;
+  const container = document.getElementById("m-image-preview-container");
+  if (!input || !container) return;
 
   input.addEventListener("change", () => {
     if (menuImagePreviewObjectUrl) {
       URL.revokeObjectURL(menuImagePreviewObjectUrl);
       menuImagePreviewObjectUrl = null;
     }
+
     const f = input.files?.[0];
+    
     if (!f) {
-      preview.hidden = true;
-      preview.removeAttribute("src");
-      if (previewLabel) previewLabel.hidden = true;
+      // Si pas de fichier : on vide le container
+      container.innerHTML = "";
       return;
     }
+
+    // Si fichier : on crée les éléments
     menuImagePreviewObjectUrl = URL.createObjectURL(f);
-    preview.src = menuImagePreviewObjectUrl;
-    preview.hidden = false;
-    if (previewLabel) previewLabel.hidden = false;
+    
+    container.innerHTML = `
+      <label class="form-label" for="m-image-preview" id="m-image-preview-label">Aperçu</label>
+      <img id="m-image-preview" class="admin-menu-image-preview" alt="" width="200" height="120" />
+    `;
+    
+    const preview = container.querySelector("#m-image-preview");
+    if (preview) {
+      preview.src = menuImagePreviewObjectUrl;
+    }
   });
 }
 
