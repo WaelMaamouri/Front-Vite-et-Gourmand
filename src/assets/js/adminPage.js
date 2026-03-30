@@ -425,6 +425,9 @@ function bindMenuForm(refresh) {
       nbPersonnesMin,
       theme,
       regime,
+      entrees: entree,
+      plats: plat,
+      desserts: dessert,
       image,
       description,
       conditions,
@@ -481,9 +484,9 @@ function bindMenuEditClicks(container) {
     setVal("m-nb", menu.nbPersonnesMin ?? "");
     setVal("m-theme", menu.theme ?? "");
     setVal("m-regime", menu.regime ?? "");
-    setVal("m-entree", menu.entree ?? "");
-    setVal("m-plat", menu.plat ?? "");
-    setVal("m-dessert", menu.dessert ?? "");
+    setVal("m-entree", menu.entrees ?? "");
+    setVal("m-plat", menu.plats ?? "");
+    setVal("m-dessert", menu.desserts ?? "");
     setVal("m-desc", menu.description ?? "");
     setVal("m-cond", menu.conditions ?? "");
 
