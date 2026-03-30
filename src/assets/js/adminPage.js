@@ -63,6 +63,7 @@ async function uploadMenuImageFile(file) {
 
 function resetMenuImagePreview() {
   const preview = document.getElementById("m-image-preview");
+  const previewLabel = document.getElementById("m-image-preview-label");
   const input = document.getElementById("m-image-file");
   if (menuImagePreviewObjectUrl) {
     URL.revokeObjectURL(menuImagePreviewObjectUrl);
@@ -72,12 +73,16 @@ function resetMenuImagePreview() {
     preview.hidden = true;
     preview.removeAttribute("src");
   }
+  if (previewLabel) {
+    previewLabel.hidden = true;
+  }
   if (input) input.value = "";
 }
 
 function bindMenuImagePreview() {
   const input = document.getElementById("m-image-file");
   const preview = document.getElementById("m-image-preview");
+  const previewLabel = document.getElementById("m-image-preview-label");
   if (!input || !preview) return;
 
   input.addEventListener("change", () => {
@@ -89,11 +94,13 @@ function bindMenuImagePreview() {
     if (!f) {
       preview.hidden = true;
       preview.removeAttribute("src");
+      if (previewLabel) previewLabel.hidden = true;
       return;
     }
     menuImagePreviewObjectUrl = URL.createObjectURL(f);
     preview.src = menuImagePreviewObjectUrl;
     preview.hidden = false;
+    if (previewLabel) previewLabel.hidden = false;
   });
 }
 
@@ -372,6 +379,9 @@ function bindMenuForm(refresh) {
     const nbPersonnesMin = Number(document.getElementById("m-nb")?.value || 0);
     const theme = document.getElementById("m-theme")?.value.trim() || "";
     const regime = document.getElementById("m-regime")?.value.trim() || "";
+    const entree = document.getElementById("m-entree")?.value.trim() || "";
+    const plat = document.getElementById("m-plat")?.value.trim() || "";
+    const dessert = document.getElementById("m-dessert")?.value.trim() || "";
     const imageFile = document.getElementById("m-image-file")?.files?.[0];
     const description = document.getElementById("m-desc")?.value.trim() || "";
     const conditions = document.getElementById("m-cond")?.value.trim() || "";
@@ -423,7 +433,10 @@ function bindMenuForm(refresh) {
       await refresh();
     } catch (err) {
       console.error(err);
-      alert(err.message || (editing ? "Erreur mise à jour menu" : "Erreur création menu"));
+      alert(
+        err.message ||
+          (editing ? "Erreur mise à jour menu" : "Erreur création menu"),
+      );
     }
   });
 }
@@ -459,6 +472,9 @@ function bindMenuEditClicks(container) {
     setVal("m-nb", menu.nbPersonnesMin ?? "");
     setVal("m-theme", menu.theme ?? "");
     setVal("m-regime", menu.regime ?? "");
+    setVal("m-entree", menu.entree ?? "");
+    setVal("m-plat", menu.plat ?? "");
+    setVal("m-dessert", menu.dessert ?? "");
     setVal("m-desc", menu.description ?? "");
     setVal("m-cond", menu.conditions ?? "");
 

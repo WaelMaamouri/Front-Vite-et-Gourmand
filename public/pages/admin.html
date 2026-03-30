@@ -139,6 +139,13 @@
                   Choisissez une image sur votre ordinateur. Elle est envoyée au
                   serveur ; l’URL renvoyée est enregistrée avec le menu.
                 </p>
+                <label
+                  class="form-label"
+                  for="m-image-preview"
+                  id="m-image-preview-label"
+                  hidden
+                  >Aperçu</label
+                >
                 <img
                   id="m-image-preview"
                   class="admin-menu-image-preview"
@@ -147,6 +154,38 @@
                   height="120"
                   hidden
                 />
+              </div>
+
+              <div class="form-block-grid">
+                <div class="form-group">
+                  <label class="form-label" for="m-entree">Entrée</label>
+                  <input
+                    class="form-input"
+                    id="m-entree"
+                    type="text"
+                    placeholder="Ex: Soupe à l'oignon..."
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="m-plat">Plat</label>
+                  <input
+                    class="form-input"
+                    id="m-plat"
+                    type="text"
+                    placeholder="Ex: Coq au vin..."
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="m-dessert">Dessert</label>
+                  <input
+                    class="form-input"
+                    id="m-dessert"
+                    type="text"
+                    placeholder="Ex: Crème brûlée..."
+                  />
+                </div>
               </div>
 
               <div class="form-group">
