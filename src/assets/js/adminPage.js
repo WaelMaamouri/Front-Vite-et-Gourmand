@@ -71,12 +71,12 @@ function resetMenuImagePreview() {
   }
   if (preview) {
     preview.hidden = true;
-    preview.style.display = "none";
+    preview.style.cssText = "display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; border: none !important; opacity: 0 !important;";
     preview.removeAttribute("src");
   }
   if (previewLabel) {
     previewLabel.hidden = true;
-    previewLabel.style.display = "none";
+    previewLabel.style.cssText = "display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; opacity: 0 !important;";
   }
   if (input) input.value = "";
 }
@@ -95,21 +95,21 @@ function bindMenuImagePreview() {
     const f = input.files?.[0];
     if (!f) {
       preview.hidden = true;
-      preview.style.display = "none";
+      preview.style.cssText = "display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; border: none !important; opacity: 0 !important;";
       preview.removeAttribute("src");
       if (previewLabel) {
         previewLabel.hidden = true;
-        previewLabel.style.display = "none";
+        previewLabel.style.cssText = "display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; opacity: 0 !important;";
       }
       return;
     }
     menuImagePreviewObjectUrl = URL.createObjectURL(f);
     preview.src = menuImagePreviewObjectUrl;
     preview.hidden = false;
-    preview.style.display = "block";
+    preview.style.cssText = "display: block !important; visibility: visible !important; width: 200px !important; height: 120px !important; margin: auto !important;";
     if (previewLabel) {
       previewLabel.hidden = false;
-      previewLabel.style.display = "block";
+      previewLabel.style.cssText = "display: block !important; visibility: visible !important;";
     }
   });
 }
