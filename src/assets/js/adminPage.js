@@ -71,10 +71,12 @@ function resetMenuImagePreview() {
   }
   if (preview) {
     preview.hidden = true;
+    preview.style.display = "none";
     preview.removeAttribute("src");
   }
   if (previewLabel) {
     previewLabel.hidden = true;
+    previewLabel.style.display = "none";
   }
   if (input) input.value = "";
 }
@@ -93,14 +95,22 @@ function bindMenuImagePreview() {
     const f = input.files?.[0];
     if (!f) {
       preview.hidden = true;
+      preview.style.display = "none";
       preview.removeAttribute("src");
-      if (previewLabel) previewLabel.hidden = true;
+      if (previewLabel) {
+        previewLabel.hidden = true;
+        previewLabel.style.display = "none";
+      }
       return;
     }
     menuImagePreviewObjectUrl = URL.createObjectURL(f);
     preview.src = menuImagePreviewObjectUrl;
     preview.hidden = false;
-    if (previewLabel) previewLabel.hidden = false;
+    preview.style.display = "block";
+    if (previewLabel) {
+      previewLabel.hidden = false;
+      previewLabel.style.display = "block";
+    }
   });
 }
 
