@@ -64,16 +64,16 @@ async function uploadMenuImageFile(file) {
 function resetMenuImagePreview() {
   const container = document.getElementById("m-image-preview-container");
   const input = document.getElementById("m-image-file");
-  
+
   if (menuImagePreviewObjectUrl) {
     URL.revokeObjectURL(menuImagePreviewObjectUrl);
     menuImagePreviewObjectUrl = null;
   }
-  
+
   if (container) {
     container.innerHTML = "";
   }
-  
+
   if (input) {
     input.value = "";
   }
@@ -91,7 +91,7 @@ function bindMenuImagePreview() {
     }
 
     const f = input.files?.[0];
-    
+
     if (!f) {
       // Si pas de fichier : on vide le container
       container.innerHTML = "";
@@ -100,12 +100,12 @@ function bindMenuImagePreview() {
 
     // Si fichier : on crée les éléments
     menuImagePreviewObjectUrl = URL.createObjectURL(f);
-    
+
     container.innerHTML = `
       <label class="form-label" for="m-image-preview" id="m-image-preview-label">Aperçu</label>
       <img id="m-image-preview" class="admin-menu-image-preview" alt="" width="200" height="120" />
     `;
-    
+
     const preview = container.querySelector("#m-image-preview");
     if (preview) {
       preview.src = menuImagePreviewObjectUrl;

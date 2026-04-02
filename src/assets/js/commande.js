@@ -118,6 +118,9 @@ export async function bindCommandeForm() {
     } catch (err) {
       console.error(err);
       alert(err.message || "Erreur envoi demande");
+      if (err.status === 401) {
+        window.location.href = "/connexion";
+      }
     }
   });
 }
